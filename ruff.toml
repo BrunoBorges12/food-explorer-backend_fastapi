@@ -1,0 +1,55 @@
+# Configurações para o Ruff
+
+# Diretórios a serem ignorados durante a análise
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+indent-width = 1
+
+# Configurações de linting (verificação de código)
+[lint]
+# Selecionar quais erros e avisos devem ser verificados
+select = ["E4", "E7", "E9", "F"]
+# Ignorar erros ou avisos específicos
+ignore = []
+# Permitir correção para todas as regras habilitadas
+fixable = ["ALL"]
+# Permitir variáveis não utilizadas com prefixo de sublinhado
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Configurações de formatação de código
+[format]
+# Estilo de aspas para strings
+quote-style = "single"
+# Estilo de indentação
+indent-style = "space"
+# Respeitar vírgulas mágicas no final das listas, dicionários, etc.
+skip-magic-trailing-comma = false
+# Detectar automaticamente o tipo de quebra de linha
+line-ending = "auto"
