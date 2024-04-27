@@ -1,6 +1,4 @@
-# Configurações para o Ruff
-
-# Diretórios a serem ignorados durante a análise
+# Exclude a variety of commonly ignored directories.
 exclude = [
     ".bzr",
     ".direnv",
@@ -30,26 +28,50 @@ exclude = [
     "venv",
 ]
 
-indent-width = 1
+# Same as Black.
+line-length = 88
+indent-width = 4
 
-# Configurações de linting (verificação de código)
+# Assume Python 3.8
+target-version = "py38"
+
 [lint]
-# Selecionar quais erros e avisos devem ser verificados
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
 select = ["E4", "E7", "E9", "F"]
-# Ignorar erros ou avisos específicos
 ignore = []
-# Permitir correção para todas as regras habilitadas
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
-# Permitir variáveis não utilizadas com prefixo de sublinhado
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-# Configurações de formatação de código
 [format]
-# Estilo de aspas para strings
-quote-style = "single"
-# Estilo de indentação
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
 indent-style = "space"
-# Respeitar vírgulas mágicas no final das listas, dicionários, etc.
+
+# Like Black, respect magic trailing commas.
 skip-magic-trailing-comma = false
-# Detectar automaticamente o tipo de quebra de linha
+
+# Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
