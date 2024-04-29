@@ -2,9 +2,6 @@ from pydantic import PostgresDsn, computed_field
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-#  [ ]  configurar o banco de dados
-#  [ ]  configurar o rota  padrão 'api/vi'
-
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file="../.env")
@@ -12,6 +9,8 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
     POSTGRES_SERVER: str
+    PROJECT_NAME: str = "food-explorer"
+    API_V1_STR: str = "/v1/api"
 
     @computed_field
     @property
@@ -26,6 +25,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-
-print(settings.SQLALCHEMY_DATABASE_URI)
