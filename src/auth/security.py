@@ -1,0 +1,11 @@
+from passlib.context import CryptContext  # type: ignore
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+def verific_password_hash(password: str) -> str:
+    return pwd_context.verify(password)
+
+
+def get_password_hash(password: str) -> str:
+    return pwd_context.hash(password)

@@ -21,6 +21,7 @@ class Settings(BaseSettings):
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_SERVER,
             port=5432,
+            path=self.POSTGRES_DB,
         )
 
 
