@@ -1,7 +1,7 @@
 from datetime import timedelta
 from typing import Annotated
 
-from auth.models import UserCreate
+from auth.models import Token, UserCreate
 from auth.security import create_access_token
 from auth.service import authentication, create_user, get_user_by_email
 from core.config import settings
@@ -35,4 +35,4 @@ async def login(
         return HTTPException(status_code=401, detail="Usuario Inativo")
     acess_token_expirer = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
 
-    return create_access_token(user_login.id, acess_token_expirer)
+    return Token(access_token=create_access_token(user_login.id, acess_token_expirer))
