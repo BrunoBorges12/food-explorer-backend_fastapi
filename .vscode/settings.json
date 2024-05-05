@@ -8,6 +8,6 @@
 	  "editor.defaultFormatter": "charliermarsh.ruff"
 	  
 	},
-	"ruff.lint.args": ["--config=/home/brunosb/projetos/food-explorer-back/ruff.toml"],
-    "ruff.format.args": ["--config=/home/brunosb/projetos/food-explorer-back/ruff.toml"]
+	"ruff.lint.args": ["./ruff.toml"],
+    "ruff.format.args": ["./ruff.toml"]
 }

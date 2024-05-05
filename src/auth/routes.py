@@ -12,14 +12,13 @@ from session_deps import SessionDep
 router = APIRouter()
 
 
-@router.post("/register/")
+@router.post("/register")
 async def create_users(session: SessionDep, user: UserCreate):
     user_db = get_user_by_email(session, user.email)
     if user_db:
-        return HTTPException(
+        raise HTTPException(
             status_code=400,
             detail="O usuário com este e-mail já existe no sistema",
-            headers=user_db,
         )
     return create_user(session, user)
 
