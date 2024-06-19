@@ -1,10 +1,14 @@
 from datetime import datetime, timedelta
+from typing import Annotated
 
 import jwt
 from core.config import settings
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext  # type: ignore
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/v1/api/login")
 
 
 def verific_password_hash(password: str, hash_password) -> str:
@@ -21,3 +25,16 @@ def create_access_token(subject: str, token_expire: timedelta) -> str:
         {"id": subject, "exp": expire_data}, settings.SECRET_KEY, algorithm="HS256"
     )
     return encode
+
+
+def verific_token(token: Annotated[str, Depends(oauth2_scheme)]):
+    try:
+        print(token)
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        return payload
+    except:  # noqa: E722
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
