@@ -9,3 +9,7 @@ def create_product(sesssion: Session, data: Product):
     sesssion.commit()
     sesssion.refresh(products)
     return products
+
+
+def list_product(session: Session, id: str):
+    session.exec()

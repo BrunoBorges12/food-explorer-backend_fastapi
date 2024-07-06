@@ -29,7 +29,6 @@ def create_access_token(subject: str, token_expire: timedelta) -> str:
 
 def verific_token(token: Annotated[str, Depends(oauth2_scheme)]):
     try:
-        print(token)
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         return payload
     except:  # noqa: E722
