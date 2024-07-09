@@ -1,5 +1,5 @@
 from products.models import Product
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 
 def create_product(sesssion: Session, data: Product):
@@ -11,5 +11,7 @@ def create_product(sesssion: Session, data: Product):
     return products
 
 
-def list_product(session: Session, id: str):
-    session.exec()
+def list_product(session: Session, id: int):
+    product = select(Product).where(Product.id == id)
+    results = session.exec(product).first()
+    return results
