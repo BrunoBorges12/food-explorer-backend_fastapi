@@ -1,6 +1,7 @@
-from auth.models import User
-from products.models import Product
 from sqlmodel import SQLModel
+
+from src.auth.models import User
+from src.products.models import Product
 
 
 class User_table(User, SQLModel):
