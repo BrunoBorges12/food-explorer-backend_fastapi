@@ -21,8 +21,7 @@ def create_product(
     price: Decimal = Form(default=0),
 ):
     upload_file_name = create_file(file)
-    print(upload_file_name["message"])
-    print(file.filename)
+
     if upload_file_name["filename"] is not None:
         product_dict_model = ProductBase(
             name=name,
