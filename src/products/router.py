@@ -3,7 +3,7 @@ from uuid import UUID
 
 from auth.security import verific_token
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
-from products.models import ProductBase
+from products.models import ProductBaseModel
 from products.service import create_product as create_product_service
 from products.service import list_product
 from session_deps import SessionDep
@@ -12,7 +12,7 @@ from utils.create_file import create_file
 router = APIRouter(dependencies=[Depends(verific_token)])
 
 
-@router.post("/create_product", response_model=ProductBase)
+@router.post("/create_product", response_model=ProductBaseModel)
 def create_product(
     session: SessionDep,
     name: str = Form(),
@@ -23,7 +23,7 @@ def create_product(
     upload_file_name = create_file(file)
 
     if upload_file_name["filename"] is not None:
-        product_dict_model = ProductBase(
+        product_dict_model = ProductBaseModel(
             name=name,
             description=description,
             img_product=upload_file_name["filename"],
