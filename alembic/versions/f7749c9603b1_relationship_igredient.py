@@ -1,8 +1,8 @@
 """relationship igredient
 
-Revision ID: 75e3b6c57499
+Revision ID: f7749c9603b1
 Revises: 
-Create Date: 2024-07-16 16:19:10.295585
+Create Date: 2024-07-17 18:27:51.325671
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import sqlmodel.sql.sqltypes
 
 
 # revision identifiers, used by Alembic.
-revision = '75e3b6c57499'
+revision = 'f7749c9603b1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('description', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('price', sa.Numeric(precision=5, scale=3), nullable=False),
     sa.Column('img_product', sqlmodel.sql.sqltypes.AutoString(), nullable=True),
-    sa.Column('id', sqlmodel.sql.sqltypes.GUID(), nullable=False),
+    sa.Column('id', sa.Uuid(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
@@ -40,7 +40,7 @@ def upgrade():
     op.create_table('ingredient',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-    sa.Column('id_product', sqlmodel.sql.sqltypes.GUID(), nullable=True),
+    sa.Column('id_product', sa.Uuid(), nullable=True),
     sa.ForeignKeyConstraint(['id_product'], ['product.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

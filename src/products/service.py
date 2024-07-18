@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from products.models import Product
+from products.models import Ingredient, Product, ProductCreate
 from sqlmodel import Session, select
 
 # lista do produto
@@ -8,12 +8,17 @@ from sqlmodel import Session, select
 # criação dos produtos
 
 
-def create_product(sesssion: Session, data: Product):
+def create_product(sesssion: Session, data: ProductCreate):
     products = Product.model_validate(data)
-
     sesssion.add(products)
     sesssion.commit()
     sesssion.refresh(products)
+    for ingredient in data.ingredients:
+        ingredient = Ingredient(name=ingredient, id_product=products.id)
+        sesssion.add(ingredient)
+        sesssion.commit()
+        sesssion.refresh(ingredient)
+
     return products
 
 

@@ -8,9 +8,9 @@ class UserTable(User, SQLModel):
     pass
 
 
-class ProductsTables(Product, SQLModel):
+class ProductsTables(Product):
     pass
 
 
-class IngredientTable(Ingredient, SQLModel):
+class IngredientTable(Ingredient):
     pass
