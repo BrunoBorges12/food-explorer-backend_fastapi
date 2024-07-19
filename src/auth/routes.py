@@ -37,5 +37,11 @@ async def login(
     if not user_login.is_active:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Usuario Inativo")
     acess_token_expirer = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-
-    return Token(access_token=create_access_token(user_login.id, acess_token_expirer))
+    return Token(
+        access_token=create_access_token(
+            user_login.id,
+            acess_token_expirer,
+            user_login.is_superuser,
+            user_login.is_active,
+        )
+    )

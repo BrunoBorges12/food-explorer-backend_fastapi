@@ -19,10 +19,19 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 
-def create_access_token(subject: str, token_expire: timedelta) -> str:
+def create_access_token(
+    id: str, token_expire: timedelta, subjectAdmin, subjectActive
+) -> str:
     expire_data = datetime.utcnow() + token_expire
     encode = jwt.encode(
-        {"id": subject, "exp": expire_data}, settings.SECRET_KEY, algorithm="HS256"
+        {
+            "id": id,
+            "exp": expire_data,
+            "subjectAdmin": subjectAdmin,
+            "subjectActive": subjectActive,
+        },
+        settings.SECRET_KEY,
+        algorithm="HS256",
     )
     return encode
 
