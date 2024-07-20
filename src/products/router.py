@@ -6,11 +6,11 @@ from auth.security import verific_token
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from products.models import ProductCreate
 from products.service import create_product as create_product_service
-from products.service import list_product
+from products.service import list_product, lists_produtos
 from session_deps import SessionDep
 from utils.create_file import create_file
 
-router = APIRouter(dependencies=[Depends(verific_token)])
+router = APIRouter()
 
 
 @router.post("/create_product", response_model=ProductCreate)
@@ -53,3 +53,8 @@ def product(session: SessionDep, id: UUID):
     if not product:
         raise HTTPException(status_code=404, detail="Não existe esse produto")
     return product
+
+
+@router.get("/products")
+def products(session: SessionDep):
+    return lists_produtos(session)
